@@ -1,10 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,28 +9,30 @@ import static org.junit.Assert.assertTrue;
 public class StudentRepositoryTest {
 
     private StudentRepository studentRepository;
+    private Collection<Student> testStudents;
 
     @Before
     public void init() {
-        studentRepository = new StudentRepository(StudentsProvider.getTestStudents());
+        testStudents = StudentsProvider.getTestStudents();
+        studentRepository = new StudentRepository(testStudents);
     }
 
     @Test
     public void getStudentsUnderTheAgeOf() {
-        List<Student> students = studentRepository.getStudentsSortedByAgeUnderTheAgeOf(25);
-        List<String> actualEmails = students.stream().map(Student::getEmail).collect(Collectors.toList());
+        List<String> actualEmails = studentRepository.getStudentEmailsSortedByAgeUnderTheAgeOf(25);
         assertEquals(StudentsProvider.getStudentEmailsSortedByAgeUnderTheAgeOf(25), actualEmails);
     }
 
     @Test
     public void getSortedStudentNames() {
-        List<String> studentNames = studentRepository.getAndPrintSortedStudentNames();
-        assertEquals(StudentsProvider.getSortedStudentsName(), studentNames);
+        List<String> studentNames = studentRepository.makeStudentNamesUppercaseAndReturnItAsSortedDistinctList();
+        assertEquals(StudentsProvider.makeStudentNamesUppercaseAndReturnItAsSortedDistinctList(), studentNames);
+        assertTrue(testStudents.stream().map(Student::getName).allMatch(s -> s.toUpperCase().equals(s)));
     }
 
     @Test
-    public void getUniversities() {
-        assertEquals(StudentsProvider.getUniversitiesSet(), studentRepository.getUniversities());
+    public void getNonNullUniversities() {
+        assertEquals(StudentsProvider.getNonNullUniversitiesSet(), studentRepository.getNonNullUniversities());
     }
 
     @Test
@@ -46,11 +45,74 @@ public class StudentRepositoryTest {
 
     @Test
     public void getStudentsGroupedByUniversity() {
-        Map<String, List<Student>> studentsGroupedByUniversity = studentRepository.getStudentsGroupedByUniversity();
-        Set<String> universitiesSet = StudentsProvider.getUniversitiesSet();
+        Map<String, List<Student>> studentsGroupedByUniversity = studentRepository.getOverageStudentsGroupedByUniversity();
+        Set<String> universitiesSet = StudentsProvider.getNonNullUniversitiesSet();
         assertEquals(universitiesSet, studentsGroupedByUniversity.keySet());
-        assertTrue(universitiesSet.stream()
-                .allMatch(university -> studentsGroupedByUniversity.get(university).stream()
-                        .allMatch(student -> student.getUniversity().equals(university))));
+        assertEquals(3, studentsGroupedByUniversity.get("UPT").size());
+        assertEquals(3, studentsGroupedByUniversity.get("UVT").size());
+        assertEquals(1, studentsGroupedByUniversity.get("UMFT").size());
+        assertEquals(1, studentsGroupedByUniversity.get("USAMVBT").size());
+    }
+
+    @Test
+    public void testGetStudentwithSecondLongestEmail() {
+        Optional<Student> theStudentWithTheNthLongestEmail = studentRepository.getTheStudentWithTheNthShortestEmail(2);
+        assertEquals(StudentsProvider.getTheStudentWithNthShortestEmail(2), theStudentWithTheNthLongestEmail);
+    }
+
+    @Test
+    public void testGetTheNameOfTheSecondOldestStudent() {
+        Optional<Student> theNameOfTheSecondOldestStudent = studentRepository.getTheNameOfTheSecondOldestStudent();
+        assertEquals(StudentsProvider.getTheNameOfTheSecondOldestStudent(), theNameOfTheSecondOldestStudent);
+    }
+
+    @Test
+    public void testGetAverageAgeOfNStudentsInUniversity2UPT() {
+        testGetAverageAgeOfNStudentsInUniversity(2, "UPT");
+    }
+
+    @Test
+    public void testGetAverageAgeOfNStudentsInUniversity3UPT() {
+        testGetAverageAgeOfNStudentsInUniversity(3, "UPT");
+    }
+
+    @Test
+    public void testGetAverageAgeOfNStudentsInUniversity1UPT() {
+        testGetAverageAgeOfNStudentsInUniversity(1, "UPT");
+    }
+
+    @Test
+    public void testGetAverageAgeOfNStudentsInUniversity4UPT() {
+        testGetAverageAgeOfNStudentsInUniversity(4, "UPT");
+    }
+
+    @Test
+    public void testGetAverageAgeOfNStudentsInUniversity4USAMVBT() {
+        testGetAverageAgeOfNStudentsInUniversity(4, "USAMVBT");
+    }
+
+    @Test
+    public void testCountStudentsWithNamesLongerThan10() {
+        testCountStudentsWithNamesLongerThan(10);
+    }
+
+    @Test
+    public void testCountStudentsWithNamesLongerThan15() {
+        testCountStudentsWithNamesLongerThan(15);
+    }
+
+    @Test
+    public void testCountStudentsWithNamesLongerThan20() {
+        testCountStudentsWithNamesLongerThan(20);
+    }
+
+    private void testCountStudentsWithNamesLongerThan(int i) {
+        long countStudentsWithNamesLongerThan = studentRepository.countStudentsWithNamesLongerThan(i);
+        assertEquals(StudentsProvider.countStudentsWithNamesLongerThan(i), countStudentsWithNamesLongerThan);
+    }
+
+    private void testGetAverageAgeOfNStudentsInUniversity(int i, String university) {
+        OptionalDouble actualResult = studentRepository.getAverageAgeOfNStudentsInUniversity(i, university);
+        assertEquals(StudentsProvider.getAverageAgeOfNStudentsInUniversity(i, university), actualResult);
     }
 }

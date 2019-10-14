@@ -1,4 +1,23 @@
+import java.util.Objects;
+
 public class Student {
+
+    private String name;
+    private String email;
+    private int age;
+    private String university;
+
+    public Student(String name, String email, int age, String university) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.university = university;
+    }
+
+    public boolean isOverage() {
+        return age >= 18;
+    }
+
     public String getName() {
         return name;
     }
@@ -31,20 +50,21 @@ public class Student {
         this.university = university;
     }
 
-    public Student(String name, String email, int age, String university) {
-        this.name = name;
-        this.email = email;
-        this.age = age;
-        this.university = university;
-    }
-
-    private String name;
-    private String email;
-    private int age;
-    private String university;
-
     @Override
     public String toString() {
         return name + " " + email + " " + age + " " + university;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return email.equals(student.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 }

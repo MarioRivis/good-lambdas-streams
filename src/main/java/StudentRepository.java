@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class StudentRepository {
     private Collection<Student> students;
@@ -9,40 +7,44 @@ public class StudentRepository {
         this.students = new ArrayList<>(students);
     }
 
-    public List<Student> getStudentsSortedByAgeUnderTheAgeOf(int age) {
-        return students.stream()
-                .filter(student -> student.getAge() < age)
-                .sorted((a, b) -> {
-                    if (a.getAge() < b.getAge())
-                        return -1;
-                    else if (a.getAge() > b.getAge())
-                        return 1;
-                    return 0;
-                })
-                .collect(Collectors.toList());
+    public List<String> getStudentEmailsSortedByAgeUnderTheAgeOf(int age) {
+        return null;
     }
 
-    public List<String> getAndPrintSortedStudentNames() {
-        return students.stream()
-                .map(Student::getName)
-                .sorted()
-                .peek(System.out::println)
-                .collect(Collectors.toList());
+    /**
+     * @return returns the sorted list of distinct names while setting all names to Uppercase characters.
+     */
+    public List<String> makeStudentNamesUppercaseAndReturnItAsSortedDistinctList() {
+        return null;
     }
 
-    public Set<String> getUniversities() {
-        return students.stream()
-                .map(Student::getUniversity)
-                .collect(Collectors.toSet());
+    public Set<String> getNonNullUniversities() {
+        return null;
     }
 
     public Map<String, Student> getStudentsMappedByEmail() {
-        return students.stream()
-                .collect(Collectors.toMap(Student::getEmail, Function.identity()));
+        return null;
     }
 
-    public Map<String, List<Student>> getStudentsGroupedByUniversity() {
-        return students.stream()
-                .collect(Collectors.groupingBy(Student::getUniversity));
+    public Map<String, List<Student>> getOverageStudentsGroupedByUniversity() {
+        return null;
     }
+
+    public Optional<Student> getTheStudentWithTheNthShortestEmail(int n) {
+        return null;
+    }
+
+    public Optional<Student> getTheNameOfTheSecondOldestStudent() {
+        return null;
+    }
+
+    public OptionalDouble getAverageAgeOfNStudentsInUniversity(int n, String university) {
+        return null;
+    }
+
+    public long countStudentsWithNamesLongerThan(int n) {
+        return -1;
+    }
+
+
 }
