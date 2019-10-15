@@ -12,9 +12,11 @@ public class StudentRepository {
     }
 
     /**
-     * @return returns the sorted list of distinct names while setting all names to Uppercase characters.
+     * @return returns the sorted list of distinct names.
+     *
+     * SIDE EFFECT: makes all student names uppercase
      */
-    public List<String> makeStudentNamesUppercaseAndReturnItAsSortedDistinctList() {
+    public List<String> makeStudentNamesUppercaseAndReturnThemAsSortedDistinctList() {
         return null;
     }
 

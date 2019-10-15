@@ -25,7 +25,7 @@ public class StudentRepositoryTest {
 
     @Test
     public void getSortedStudentNames() {
-        List<String> studentNames = studentRepository.makeStudentNamesUppercaseAndReturnItAsSortedDistinctList();
+        List<String> studentNames = studentRepository.makeStudentNamesUppercaseAndReturnThemAsSortedDistinctList();
         assertEquals(StudentsProvider.makeStudentNamesUppercaseAndReturnItAsSortedDistinctList(), studentNames);
         assertTrue(testStudents.stream().map(Student::getName).allMatch(s -> s.toUpperCase().equals(s)));
     }
