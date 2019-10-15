@@ -36,7 +36,7 @@ public class StudentRepository {
         return null;
     }
 
-    public Optional<Student> getTheNameOfTheSecondOldestStudent() {
+    public Optional<String> getTheNameOfTheSecondOldestStudent() {
         return null;
     }
 

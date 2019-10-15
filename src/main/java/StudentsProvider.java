@@ -10,13 +10,13 @@ class StudentsProvider {
                 new Student("Cristian Paul", "cristip@mail.com", 22, "UVT"),
                 new Student("Ion Lazar", "lazari@mail.com", 26, "UVT"),
                 new Student("Izabella Kiss", "kissiza@mail.com", 17, "UMFT"),
-                new Student("Andreea Achim", "andreea32@hotmail.com", 20, null),
+                new Student("Andreea Achim", "andreea32@hotmail.com", 18, null),
                 new Student("Gheorghe Iova", "iovag@me.com", 10, "UPT"),
                 new Student("Adela Stefan", "adelas@gmail.com", 21, "UMFT"),
                 new Student("Maria Tiurbe", "maria.tiurbe@yahoo.com", 20, "UPT"),
-                new Student("Nandor Turzo", "nandor_t@gmail.com", 26, "UVT"),
-                new Student("Sergiu Bogdan", "sergiu.b@gmail.com", 23, "USAMVBT"),
-                new Student("Cristi Boc", "cristi.b@email.com", 23, null)
+                new Student("Nandor Turzo", "nandor_t@gmail.com", 27, "UVT"),
+                new Student("Sergiu Bogdan", "sergiu.b@gmail.com", 25, "USAMVBT"),
+                new Student("Cristi Boc", "cristi.b@email.com", 29, null)
         );
     }
 
@@ -52,10 +52,11 @@ class StudentsProvider {
                 .findFirst();
     }
 
-    public static Optional<Student> getTheNameOfTheSecondOldestStudent() {
+    public static Optional<String> getTheNameOfTheSecondOldestStudent() {
         return getTestStudents().stream()
                 .sorted(Comparator.comparing(Student::getAge).reversed())
                 .skip(1)
+                .map(Student::getName)
                 .findFirst();
     }
 

@@ -62,7 +62,7 @@ public class StudentRepositoryTest {
 
     @Test
     public void testGetTheNameOfTheSecondOldestStudent() {
-        Optional<Student> theNameOfTheSecondOldestStudent = studentRepository.getTheNameOfTheSecondOldestStudent();
+        Optional<String> theNameOfTheSecondOldestStudent = studentRepository.getTheNameOfTheSecondOldestStudent();
         assertEquals(StudentsProvider.getTheNameOfTheSecondOldestStudent(), theNameOfTheSecondOldestStudent);
     }
 
@@ -88,6 +88,11 @@ public class StudentRepositoryTest {
 
     @Test
     public void testGetAverageAgeOfNStudentsInUniversity4USAMVBT() {
+        testGetAverageAgeOfNStudentsInUniversity(4, "USAMVBT");
+    }
+
+    @Test
+    public void testGetAverageAgeOfNStudentsInUniversity4Null() {
         testGetAverageAgeOfNStudentsInUniversity(4, "USAMVBT");
     }
 
