@@ -111,6 +111,27 @@ public class StudentRepositoryTest {
         testCountStudentsWithNamesLongerThan(20);
     }
 
+    @Test
+    public void testCountNumberOfStudentsWithAtLeast1ColleaguesInDifferentUniversity() {
+        testCountNumberOfStudentsWithAtLeastNColleaguesInDifferentUniversity(1);
+    }
+
+    @Test
+    public void testCountNumberOfStudentsWithAtLeast2ColleaguesInDifferentUniversity() {
+        testCountNumberOfStudentsWithAtLeastNColleaguesInDifferentUniversity(2);
+    }
+
+    @Test
+    public void testCountNumberOfStudentsWithAtLeast3ColleaguesInDifferentUniversity() {
+        testCountNumberOfStudentsWithAtLeastNColleaguesInDifferentUniversity(3);
+    }
+
+    @Test
+    public void testGetStudentsWithAtLeastOneColleagueWithDifferentEmailDomain() {
+        List<Student> studentsWithAtLeastOneColleagueWithDifferentEmailDomain = studentRepository.getStudentsWithAtLeastOneColleagueWithDifferentEmailDomain();
+        assertEquals(StudentsProvider.getStudentsWithAtLeastOneColleagueWithDifferentEmailDomain(), studentsWithAtLeastOneColleagueWithDifferentEmailDomain);
+    }
+
     private void testCountStudentsWithNamesLongerThan(int i) {
         long countStudentsWithNamesLongerThan = studentRepository.countStudentsWithNamesLongerThan(i);
         assertEquals(StudentsProvider.countStudentsWithNamesLongerThan(i), countStudentsWithNamesLongerThan);
@@ -119,5 +140,10 @@ public class StudentRepositoryTest {
     private void testGetAverageAgeOfNStudentsInUniversity(int i, String university) {
         OptionalDouble actualResult = studentRepository.getAverageAgeOfNStudentsInUniversity(i, university);
         assertEquals(StudentsProvider.getAverageAgeOfNStudentsInUniversity(i, university), actualResult);
+    }
+
+    private void testCountNumberOfStudentsWithAtLeastNColleaguesInDifferentUniversity(int i) {
+        double actualResult = studentRepository.countNumberOfStudentsWithAtLeastNColleaguesInDifferentUniversity(i);
+        assertEquals(StudentsProvider.countNumberOfStudentsWithAtLeastNColleaguesInDifferentUniversity(i), actualResult, 0.0001);
     }
 }

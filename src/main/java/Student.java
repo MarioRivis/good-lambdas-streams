@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Objects;
 
 public class Student {
@@ -6,12 +7,21 @@ public class Student {
     private String email;
     private int age;
     private String university;
+    private List<Student> colleagues;
 
     public Student(String name, String email, int age, String university) {
         this.name = name;
         this.email = email;
         this.age = age;
         this.university = university;
+    }
+
+    public Student(String name, String email, int age, String university, List<Student> colleagues) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.university = university;
+        this.colleagues = colleagues;
     }
 
     public boolean isOverage() {
@@ -66,5 +76,13 @@ public class Student {
     @Override
     public int hashCode() {
         return Objects.hash(email);
+    }
+
+    public List<Student> getColleagues() {
+        return colleagues;
+    }
+
+    public void setColleagues(List<Student> colleagues) {
+        this.colleagues = colleagues;
     }
 }

@@ -48,5 +48,12 @@ public class StudentRepository {
         return -1;
     }
 
+    // Students in no university (university == null) are considered to be in the same university
+    public double countNumberOfStudentsWithAtLeastNColleaguesInDifferentUniversity(int n) {
+        return -1;
+    }
 
+    public List<Student> getStudentsWithAtLeastOneColleagueWithDifferentEmailDomain() {
+        return null;
+    }
 }
