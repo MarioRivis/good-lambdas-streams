@@ -51,7 +51,7 @@ public class StudentRepositoryTest {
         assertEquals(3, studentsGroupedByUniversity.get("UPT").size());
         assertEquals(3, studentsGroupedByUniversity.get("UVT").size());
         assertEquals(1, studentsGroupedByUniversity.get("UMFT").size());
-        assertEquals(1, studentsGroupedByUniversity.get("USAMVBT").size());
+        assertEquals(1, studentsGroupedByUniversity.get("USV").size());
     }
 
     @Test
@@ -87,13 +87,13 @@ public class StudentRepositoryTest {
     }
 
     @Test
-    public void testGetAverageAgeOfNStudentsInUniversity4USAMVBT() {
-        testGetAverageAgeOfNStudentsInUniversity(4, "USAMVBT");
+    public void testGetAverageAgeOfNStudentsInUniversity4USV() {
+        testGetAverageAgeOfNStudentsInUniversity(4, "USV");
     }
 
     @Test
     public void testGetAverageAgeOfNStudentsInUniversity4Null() {
-        testGetAverageAgeOfNStudentsInUniversity(4, "USAMVBT");
+        testGetAverageAgeOfNStudentsInUniversity(4, "USV");
     }
 
     @Test
